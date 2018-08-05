@@ -9,11 +9,6 @@ GameLoop::GameLoop()
 
 void GameLoop::mainLoop()
 {
-	running = true;
-	while (running)
-	{
-		this_thread::sleep_for(chrono::milliseconds(1));
-	}
 
 }
 
