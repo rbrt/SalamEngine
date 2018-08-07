@@ -9,14 +9,14 @@ using namespace std;
 
 class GameLoop
 {
-	public:
-		GameLoop();
-		void mainLoop();
-		bool isRunning() { return running; }
-		void handleInput(GLFWwindow* window);
+    public:
+        GameLoop();
+        void mainLoop();
+        bool isRunning() { return running; }
+        void handleInput(GLFWwindow* window);
 
-	private:
-		
+    private:
+        
 
-		bool running;
+        bool running;
 };

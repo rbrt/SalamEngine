@@ -3,7 +3,7 @@
 
 GameLoop::GameLoop()
 {
-	
+    
 }
 
 
@@ -14,8 +14,8 @@ void GameLoop::mainLoop()
 
 void GameLoop::handleInput(GLFWwindow * window)
 {
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-	{
-		cout << "escape" << endl;
-	}
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    {
+        cout << "escape" << endl;
+    }
 }
