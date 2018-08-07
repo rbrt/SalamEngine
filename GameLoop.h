@@ -3,7 +3,7 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
-#include <glfw3.h>
+#include <glfw/glfw3.h>
 
 using namespace std;
 
