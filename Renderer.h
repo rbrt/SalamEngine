@@ -18,6 +18,7 @@
 #include <functional>
 #include <cstdlib>
 #include <vector>
+#include <set>
 
 using namespace std;
 
@@ -46,15 +47,29 @@ class Renderer
         void renderLoop();
         void cleanUp();
         void pickPhysicalDevice();
+        void createLogicalDevice();
+        void createSurface();
         
         void createVulkanInstance();
         bool checkValidationLayerSupport();
+        bool checkDeviceExtensionSupport(VkPhysicalDevice device);
         vector<const char*> getRequiredExtensions();
         void setupDebugCallback();
+        bool isDeviceSuitable(VkPhysicalDevice device);
 
         GLFWwindow* window;
         VkInstance instance;
         VkDebugUtilsMessengerEXT callback;
+        
+        VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
+        VkDevice device;
+        VkPhysicalDeviceFeatures deviceFeatures = {};
+        VkDeviceCreateInfo createInfo = {};
+
+        VkQueue graphicsQueue;
+        VkQueue presentQueue;
+
+        VkSurfaceKHR surface;
         
         const char** glfwExtensions;
         std::vector<const char*> extensions;
@@ -65,15 +80,30 @@ class Renderer
                                                             VkDebugUtilsMessageTypeFlagsEXT messageType,
                                                             const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
                                                             void* pUserData);
-        
-        VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
 
+        struct QueueFamilyIndices 
+        {
+            int graphicsFamily = -1;
+            int presentFamily = -1;
+
+            bool isComplete() 
+            {
+                return graphicsFamily >= 0 && presentFamily >= 0;
+            }
+        };
+        QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
+        
         bool running;
         bool initialized;
 
         unsigned int vertexShader;
         unsigned int fragmentShader;
         unsigned int shaderProgram;
+
+        const std::vector<const char*> deviceExtensions =
+        {
+            VK_KHR_SWAPCHAIN_EXTENSION_NAME
+        };
 
         const char* vertexShaderSource = "#version 140\r\n"
             "#extension GL_ARB_explicit_attrib_location : require \n"
