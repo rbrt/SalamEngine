@@ -116,7 +116,7 @@ void Renderer::createVulkanInstance()
 
 void Renderer::pickPhysicalDevice()
 {
-
+    // https://vulkan-tutorial.com/Drawing_a_triangle/Setup/Physical_devices_and_queue_families
 }
 
 bool Renderer::checkValidationLayerSupport() 
